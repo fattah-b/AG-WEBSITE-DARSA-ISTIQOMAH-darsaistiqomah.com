@@ -835,24 +835,18 @@ export default function App() {
               {
                 name: "STARTER",
                 price: "29",
-                features: ["1 Listing Produk", "Mini Landing Page", "CTA (WhatsApp / Link)", "Akses Marketplace"],
-                footer: "Sesuai untuk usahawan baru",
-                emoji: "🏪"
+                features: ["1 Listing Produk", "Mini Landing Page", "CTA (WhatsApp / Link)", "Akses Marketplace"]
               },
               {
                 name: "GROWTH",
                 price: "59",
                 recommended: true,
-                features: ["Semua dalam Starter", "Priority Listing", "Banner Rotation", "2 Produk Listing"],
-                footer: "Pilihan paling popular untuk tingkatkan jualan!",
-                emoji: "📈"
+                features: ["Semua dalam Starter", "Priority Listing", "Banner Rotation", "2 Produk Listing"]
               },
               {
                 name: "PREMIUM",
                 price: "129",
-                features: ["Semua dalam Growth", "Banner Homepage", "5 Produk Listing", "1 Push Notification / bulan"],
-                footer: "Untuk brand yang serius scale!",
-                emoji: "💎"
+                features: ["Semua dalam Growth", "Banner Homepage", "5 Produk Listing", "1 Push Notification / bulan"]
               }
             ].map((plan, i) => (
               <motion.div 
@@ -893,10 +887,6 @@ export default function App() {
                 </div>
 
                 <div className="mt-auto border-t border-white/5 pt-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-xl">{plan.emoji}</span>
-                    <p className="text-xs text-stone-500 font-medium italic">{plan.footer}</p>
-                  </div>
                   <button className={`w-full py-4 rounded-2xl font-bold uppercase tracking-widest text-[10px] transition-all ${plan.recommended ? 'gold-gradient text-black shadow-lg shadow-gold-500/20' : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'}`}>
                     Pilih Pelan {plan.name}
                   </button>
