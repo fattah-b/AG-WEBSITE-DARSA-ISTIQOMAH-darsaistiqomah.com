@@ -25,7 +25,15 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const SyeikhProfile = "/assets/GAMBAR-SYEIKH-ZAINUL-ASRI-PROFILE-IMAGE-PAYWALL.png";
+import SyeikhProfile from './assets/GAMBAR-SYEIKH-ZAINUL-ASRI-PROFILE-IMAGE-PAYWALL.png';
+import LogoUrl from './assets/DARSA-ISTIQOMAH-SIDE-NAVBAR-APP-ICON-LOGO.png';
+import SplashScreen from './assets/NEW_SPLASH_SCREEN_ICON_VER_3_NO_BACKGROUND.png';
+import Screen1 from './assets/Screenshot_2026_0422_160410.jpg';
+import Screen2 from './assets/Screenshot_20260422_152354.jpg';
+import Product1 from './assets/1775441456291-cpr66.png';
+import Product2 from './assets/1775441470187-irk76g.png';
+import Product3 from './assets/1776076657956-r2k78t.png';
+
 
 const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
   <svg 
@@ -39,7 +47,7 @@ const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: 
   </svg>
 );
 
-const LOGO_URL = "/assets/DARSA-ISTIQOMAH-SIDE-NAVBAR-APP-ICON-LOGO.png";
+const LOGO_URL = LogoUrl;
 
 const PhoneMockup = ({ children, frameColor = "bg-stone-950", borderColor = "border-stone-800" }: { children: React.ReactNode, frameColor?: string, borderColor?: string }) => (
   <div className={`relative mx-auto ${borderColor} ${frameColor} border-14 rounded-[2.5rem] h-[600px] w-[300px] shadow-2xl ring-1 ring-gold-500/20`}>
@@ -129,19 +137,19 @@ const products = [
   {
     name: "DarSA Founder Elite (Lifetime + NFC Card)",
     price: "199",
-    img: "/assets/1775441456291-cpr66.png",
+    img: Product1,
     desc: "💎 Akses Lifetime: Tadabbur AI, Kuliah Agama & Komuniti Eksklusif.\n🎁 Percuma Bamboo NFC DarSA Card (Terhad 5,000 pertama sahaja)."
   },
   {
     name: "DarSA Istiqomah Monthly Access",
     price: "50",
-    img: "/assets/1775441470187-irk76g.png",
+    img: Product2,
     desc: "✨ Akses bulanan penuh ke semua modul premium tanpa komitmen.\n🔓 Nikmati fitur lengkap Tadabbur AI & Kuliah harian."
   },
   {
     name: "Darsa Bamboo NFC Digital Business Card",
     price: "99",
-    img: "/assets/1776076657956-r2k78t.png",
+    img: Product3,
     desc: "🌿 Kad perniagaan digital NFC daripada buluh lestari.\n⚡ Kongsi profil & media sosial dengan sekali sentuh (No App Required)."
   }
 ];
@@ -557,7 +565,7 @@ export default function App() {
               <div className="relative z-10">
                 <PhoneMockup frameColor="bg-black" borderColor="border-black">
                   <img 
-                    src="/assets/Screenshot_2026_0422_160410.jpg" 
+                    src={Screen1} 
                     alt="DarSA Istiqomah App" 
                     className="w-full h-full object-cover"
                   />
@@ -588,7 +596,7 @@ export default function App() {
                 <PhoneMockup>
                   <div className="h-full w-full relative group">
                     <img 
-                      src="/assets/Screenshot_20260422_152354.jpg" 
+                      src={Screen2} 
                       alt="Modern Interface" 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                     />
@@ -1012,7 +1020,7 @@ export default function App() {
                 <div className="relative">
                   <div className="w-32 h-32 bg-stone-950 rounded-full flex items-center justify-center border border-white/10 shadow-2xl relative z-10">
                     <img 
-                      src="/assets/NEW_SPLASH_SCREEN_ICON_VER_3_NO_BACKGROUND.png" 
+                      src={SplashScreen} 
                       alt="DarSA Logo" 
                       className="w-24 h-24 object-contain"
                     />
