@@ -887,9 +887,16 @@ export default function App() {
                 </div>
 
                 <div className="mt-auto border-t border-white/5 pt-8">
-                  <button className={`w-full py-4 rounded-2xl font-bold uppercase tracking-widest text-[10px] transition-all ${plan.recommended ? 'gold-gradient text-black shadow-lg shadow-gold-500/20' : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'}`}>
-                    Pilih Pelan {plan.name}
-                  </button>
+                  <a 
+                    href={`https://wa.me/60197537296?text=${encodeURIComponent(`Assalamu'alaikum DarSA Team, saya berminat untuk mengiklankan produk saya melalui pelan ${plan.name}. Boleh bantu saya dengan langkah seterusnya? Terima kasih.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full"
+                  >
+                    <button className={`w-full py-4 rounded-2xl font-bold uppercase tracking-widest text-[10px] transition-all cursor-pointer ${plan.recommended ? 'gold-gradient text-black shadow-lg shadow-gold-500/20' : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'}`}>
+                      Pilih Pelan {plan.name}
+                    </button>
+                  </a>
                   {/* Sliding Gold Line */}
                   <div className="mt-8 h-[2px] w-0 group-hover:w-full bg-linear-to-r from-gold-400 to-transparent transition-all duration-700" />
                 </div>
