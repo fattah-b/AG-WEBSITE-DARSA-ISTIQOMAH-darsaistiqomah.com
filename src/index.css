@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 @theme {
   --font-serif: "Noto Serif", serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
