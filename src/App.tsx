@@ -260,7 +260,7 @@ const FAQItem = ({ faq, i }: { faq: any, i: number }) => {
 };
 
 const GoldenConstellation = () => {
-  const canvasRef = useEffect(() => {
+  useEffect(() => {
     const canvas = document.getElementById('constellation-canvas') as HTMLCanvasElement;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
