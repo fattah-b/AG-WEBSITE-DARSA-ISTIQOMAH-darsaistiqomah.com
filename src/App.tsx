@@ -1300,8 +1300,8 @@ export default function App() {
             exit={{ y: 100, opacity: 0 }}
             className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-fit"
           >
-            <div className="glass-card bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full p-2 px-4 flex items-center justify-center gap-2 sm:gap-4 shadow-2xl">
-              <div className="flex items-center gap-1 sm:gap-3">
+            <div className="glass-card bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full p-1.5 px-3 flex items-center justify-center gap-1 sm:gap-2 shadow-2xl">
+              <div className="flex items-center gap-0.5 sm:gap-1">
                 {[
                   { label: 'Home', href: '#home', icon: Home },
                   { label: 'Ciri Utama', href: '#ciri-utama', icon: Target },
@@ -1312,7 +1312,7 @@ export default function App() {
                   <a 
                     key={item.label} 
                     href={item.href} 
-                    className="flex flex-col items-center gap-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-stone-400 hover:text-gold-400 transition-colors p-1 sm:p-2"
+                    className="flex flex-col items-center gap-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-stone-400 hover:text-gold-400 transition-colors p-1.5 sm:p-2 px-3 sm:px-4 text-center whitespace-nowrap"
                   >
                     <item.icon size={18} className="sm:w-5 sm:h-5" />
                     <span className="hidden sm:block">{item.label}</span>
