@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-import SyeikhProfile from '../assets/GAMBAR-SYEIKH-ZAINUL-ASRI-PROFILE-IMAGE-PAYWALL.png';
+const SyeikhProfile = "/assets/GAMBAR-SYEIKH-ZAINUL-ASRI-PROFILE-IMAGE-PAYWALL.png";
 
 const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
   <svg 
@@ -1012,7 +1012,7 @@ export default function App() {
                 <div className="relative">
                   <div className="w-32 h-32 bg-stone-950 rounded-full flex items-center justify-center border border-white/10 shadow-2xl relative z-10">
                     <img 
-                      src="/assets/NEW SPLASH SCREEN ICON VER 3 NO BACKGROUND.png" 
+                      src="/assets/NEW_SPLASH_SCREEN_ICON_VER_3_NO_BACKGROUND.png" 
                       alt="DarSA Logo" 
                       className="w-24 h-24 object-contain"
                     />
