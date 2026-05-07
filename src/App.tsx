@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
   BookOpen, 
   Clock, 
@@ -21,18 +21,22 @@ import {
   Layout,
   MousePointerClick,
   MessageCircle,
-  Globe
+  Globe,
+  MapPin,
+  Calendar,
+  Navigation
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 
 import SyeikhProfile from './assets/GAMBAR-SYEIKH-ZAINUL-ASRI-PROFILE-IMAGE-PAYWALL.png';
 import LogoUrl from './assets/DARSA-ISTIQOMAH-SIDE-NAVBAR-APP-ICON-LOGO.png';
 import SplashScreen from './assets/NEW_SPLASH_SCREEN_ICON_VER_3_NO_BACKGROUND.png';
 import Screen1 from './assets/Screenshot_2026_0422_160410.jpg';
 import Screen2 from './assets/Screenshot_20260422_152354.jpg';
-import Product1 from './assets/1775441456291-cpr66.png';
-import Product2 from './assets/1775441470187-irk76g.png';
-import Product3 from './assets/1776076657956-r2k78t.png';
+import Product1 from './assets/WhatsApp Image 2026-05-07 at 08.07.59.jpeg';
+import Product3 from './assets/WhatsApp Image 2026-05-07 at 08.08.08.jpeg';
+import Kitab1 from './assets/40 wasiat penghulu seluruh umat kitab darsa.jpeg';
+import FriedChickenPromo from './assets/WhatsApp Image 2026-05-07 at 08.16.05.jpeg';
 
 
 const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
@@ -135,22 +139,22 @@ const features = [
 
 const products = [
   {
-    name: "DarSA Founder Elite (Lifetime + NFC Card)",
+    name: "DarSA Founder Elite (Lifetime Access)",
     price: "199",
     img: Product1,
-    desc: "💎 Akses Lifetime: Tadabbur AI, Kuliah Agama & Komuniti Eksklusif.\n🎁 Percuma Bamboo NFC DarSA Card (Terhad 5,000 pertama sahaja)."
-  },
-  {
-    name: "DarSA Istiqomah Monthly Access",
-    price: "50",
-    img: Product2,
-    desc: "✨ Akses bulanan penuh ke semua modul premium tanpa komitmen.\n🔓 Nikmati fitur lengkap Tadabbur AI & Kuliah harian."
+    desc: "💎 Akses Lifetime: Tadabbur AI, Kuliah Agama & Komuniti Eksklusif.\n🔓 Akses Penuh: Kiblat, Target Khatam, Ganjaran Pahala & Kuliah."
   },
   {
     name: "Darsa Bamboo NFC Digital Business Card",
     price: "99",
     img: Product3,
     desc: "🌿 Kad perniagaan digital NFC daripada buluh lestari.\n⚡ Kongsi profil & media sosial dengan sekali sentuh (No App Required)."
+  },
+  {
+    name: "40 Wasiat Penghulu Seluruh Umat",
+    price: "35",
+    img: Kitab1,
+    desc: "📚 Kitab karangan Tuan Guru Syeikh Muhd Zainul Asri.\n✨ Himpunan wasiat berharga untuk panduan hidup ummah."
   }
 ];
 
@@ -365,6 +369,108 @@ const GoldenConstellation = () => {
   return <canvas id="constellation-canvas" className="absolute inset-0 z-10" />;
 };
 
+const RoadTourProgressLine = ({ desktop, mobile }: { desktop?: boolean, mobile?: boolean }) => {
+  const { scrollYProgress } = useScroll({
+    offset: ["start center", "end center"]
+  });
+
+  if (desktop) {
+    return (
+      <motion.div 
+        style={{ scaleY: scrollYProgress }}
+        className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-gold-500/0 via-gold-500 to-gold-500/0 -translate-x-1/2 origin-top z-0" 
+      />
+    );
+  }
+
+  if (mobile) {
+    return (
+      <>
+        {/* Background line for mobile */}
+        <div className="md:hidden absolute left-[-2px] top-0 bottom-0 w-0.5 bg-white/10" />
+        {/* Active growing line for mobile */}
+        <motion.div 
+          style={{ scaleY: scrollYProgress }}
+          className="md:hidden absolute left-[-2px] top-0 bottom-0 w-0.5 bg-gold-500 origin-top z-0" 
+        />
+      </>
+    );
+  }
+
+  return null;
+};
+
+const RoadTourItem = ({ tour, index }: { tour: any, index: number }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [15, 0, -15]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
+
+  return (
+    <div ref={ref} className="relative flex flex-col md:flex-row items-center justify-between group pl-8 md:pl-0 perspective-1000">
+      {/* Timeline Dot */}
+      <motion.div 
+        initial={{ scale: 0, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="absolute left-[-5px] md:left-1/2 top-8 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-3 h-3 rounded-full bg-gold-500 ring-4 ring-stone-900 shadow-[0_0_15px_rgba(212,175,55,0.5)] z-10 transition-transform group-hover:scale-150" 
+      />
+
+      {/* Card Container with Scroll-Linked Parallax Tilt */}
+      <motion.div 
+        style={{ rotateX, opacity, scale }}
+        className={`md:w-[45%] w-full mb-0 ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:order-2 md:text-left md:pl-12'}`}
+      >
+        <div className="glass-card p-8 rounded-[32px] border-white/5 hover:border-gold-500/30 transition-all hover:-translate-y-2 group-hover:shadow-[0_10px_40px_rgba(212,175,55,0.1)] relative overflow-hidden text-left">
+          <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-gold-500/10 blur-[50px] rounded-full pointer-events-none" />
+          
+          <div className="text-gold-500 text-[10px] font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+            <Target size={14} />
+            <span>Road Tour 0{index + 1}</span>
+          </div>
+          
+          <h4 className="text-2xl font-serif mb-2 text-white">{tour.location}</h4>
+          <p className="text-emerald-400 text-xs uppercase tracking-widest font-bold mb-6">{tour.title}</p>
+          
+          <div className="flex flex-col gap-4 text-stone-400 text-sm mb-8">
+            <div className="flex items-start gap-3">
+              <MapPin size={18} className="shrink-0 text-gold-500 mt-1" />
+              <span>{tour.address}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Calendar size={18} className="shrink-0 text-gold-500" />
+              <span>{tour.date} {tour.day && `(${tour.day})`}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Clock size={18} className="shrink-0 text-gold-500" />
+              <span>{tour.time}</span>
+            </div>
+          </div>
+
+          <a 
+            href={`https://www.google.com/maps/search/?api=1&query=${tour.mapsQuery}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-white/5 hover:bg-gold-500 hover:text-black border border-white/10 px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all"
+          >
+            <Navigation size={14} />
+            Buka Maps
+          </a>
+        </div>
+      </motion.div>
+      
+      {/* Right Side Empty Spacer */}
+      <div className="md:w-[45%] hidden md:block" />
+    </div>
+  );
+};
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -436,10 +542,10 @@ export default function App() {
           className="inline-block"
         >
           <span className="text-sm font-bold tracking-widest uppercase inline-block px-4">
-            🔥 Founder Muhibin Terhad 5,000 sahaja – RM199 Lifetime • 📅 Pelancaran Rasmi: 16 Mei 2026 • 📖 Tadabur Al-Quran 30 Juzuk Kini Dibuka • 🌟 Dibimbing Oleh Tuan Guru Syeikh Zainul Asri • 💳 Dapatkan Bamboo NFC DarSA Card Eksklusif • 🛒 Marketplace DarSA: Kitab & Keperluan Ibadah • 
+            🔥 Founder Muhibin Terhad 5,000 sahaja – RM199 Lifetime • 📅 Pra pelancaran: 24 Mei 2026 • 📖 Tadabur Al-Quran 30 Juzuk Kini Dibuka • 🌟 Dibimbing Oleh Tuan Guru Syeikh Zainul Asri • 💳 Dapatkan Bamboo NFC DarSA Card Eksklusif • 🛒 Marketplace DarSA: Kitab & Keperluan Ibadah • 
           </span>
           <span className="text-sm font-bold tracking-widest uppercase inline-block px-4">
-            🔥 Founder Muhibin Terhad 5,000 sahaja – RM199 Lifetime • 📅 Pelancaran Rasmi: 16 Mei 2026 • 📖 Tadabur Al-Quran 30 Juzuk Kini Dibuka • 🌟 Dibimbing Oleh Tuan Guru Syeikh Zainul Asri • 💳 Dapatkan Bamboo NFC DarSA Card Eksklusif • 🛒 Marketplace DarSA: Kitab & Keperluan Ibadah • 
+            🔥 Founder Muhibin Terhad 5,000 sahaja – RM199 Lifetime • 📅 Pra pelancaran: 24 Mei 2026 • 📖 Tadabur Al-Quran 30 Juzuk Kini Dibuka • 🌟 Dibimbing Oleh Tuan Guru Syeikh Zainul Asri • 💳 Dapatkan Bamboo NFC DarSA Card Eksklusif • 🛒 Marketplace DarSA: Kitab & Keperluan Ibadah • 
           </span>
         </motion.div>
       </div>
@@ -637,7 +743,7 @@ export default function App() {
             {[
               { label: 'Founder Terhad', value: '5,000' },
               { label: 'Juzuk Al-Quran', value: '30' },
-              { label: 'Pelancaran Rasmi', value: '16 Mei 2026' },
+              { label: 'Pra pelancaran', value: '24 Mei 2026' },
               { label: 'Akses Eksklusif', value: 'Lifetime' },
             ].map((stat, i) => (
               <motion.div 
@@ -670,7 +776,7 @@ export default function App() {
               <div className="relative">
                 <div className="absolute inset-0 bg-gold-500/10 rounded-[48px] blur-3xl" />
                 <div className="relative glass-card p-2 rounded-[52px] border-gold-400/20 overflow-hidden shadow-2xl">
-                  <div className="aspect-[4/5] bg-stone-800 overflow-hidden rounded-[48px]">
+                  <div className="aspect-4/5 bg-stone-800 overflow-hidden rounded-[48px]">
                     <motion.img 
                       src={SyeikhProfile} 
                       alt="Tuan Guru Syeikh Zainul Asri"
@@ -746,10 +852,9 @@ export default function App() {
               {[
                 "Akses Lifetime Sepenuhnya",
                 "Tadabbur Al-Quran AI (30 Juzuk)",
-                "Eksklusif Bamboo NFC DarSA Card",
                 "Komuniti Muhibin Elite",
                 "Sistem Amalan Berstruktur",
-                "Lihat Kiblat"
+                "Arah Kiblat Tepat"
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-4 text-stone-300">
                   <CheckCircle2 className="text-emerald-500 w-6 h-6 shrink-0" />
@@ -775,7 +880,7 @@ export default function App() {
 
       {/* Advertising/Partnership Section */}
       <section id="iklan" className="py-32 relative overflow-hidden bg-stone-900/5 scroll-mt-20">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-gold-500/5 blur-[120px] rounded-full -z-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gold-500/5 blur-[120px] rounded-full -z-10" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-sm uppercase tracking-[0.4em] text-gold-500 font-bold mb-4">Peluang Kolaborasi</h2>
@@ -958,7 +1063,7 @@ export default function App() {
                 >
                   <div className="absolute inset-0 bg-gold-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   {/* Large Ghost Number Background */}
-                  <span className="absolute -bottom-10 -right-4 text-[180px] font-serif font-bold text-white/[0.03] select-none pointer-events-none group-hover:text-gold-500/[0.05] transition-colors duration-700">
+                  <span className="absolute -bottom-10 -right-4 text-[180px] font-serif font-bold text-white/3 select-none pointer-events-none group-hover:text-gold-500/5 transition-colors duration-700">
                     {step.n}
                   </span>
 
@@ -1124,6 +1229,99 @@ export default function App() {
         </div>
       </section>
 
+      {/* Road Tour Timeline Section */}
+      <section id="jelajah" className="py-32 relative bg-stone-900/40">
+        <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gold-500/5 blur-[120px] rounded-full" />
+          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full" />
+        </div>
+        
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-sm uppercase tracking-[0.4em] text-gold-500 font-bold mb-4"
+            >
+              Jelajah DarSA Istiqomah
+            </motion.h2>
+            <motion.h3 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-serif tracking-tight mb-6"
+            >
+              Road Tour <span className="italic">Pra-Pelancaran</span>
+            </motion.h3>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-stone-400 text-lg max-w-2xl mx-auto"
+            >
+              Temui skuad DarSA Istiqomah di lokasi berhampiran anda. Jom hadir beramai-ramai untuk melihat sendiri fungsi aplikasi premium ini.
+            </motion.p>
+          </div>
+
+          <div className="relative ml-4 md:ml-0">
+            {/* Center line background for desktop */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-white/5 -translate-x-1/2" />
+            
+            {/* Growing Center line for desktop */}
+            <RoadTourProgressLine desktop />
+
+            {/* Growing Left line for mobile */}
+            <RoadTourProgressLine mobile />
+
+            <div className="space-y-4 md:space-y-12 pb-12">
+              {[
+                {
+                  title: "Pra-Pelancaran Selangor",
+                  location: "Restoran DarSA Kota Warisan",
+                  address: "Arena Warisan Puteri, 1G Jalan Arena, Kota Warisan, 43900 Sepang",
+                  date: "24 Mei 2026",
+                  day: "Sabtu",
+                  time: "10:00 AM",
+                  mapsQuery: "Restoran+DarSA+Kota+Warisan+Sepang"
+                },
+                {
+                  title: "Pra-Pelancaran Selangor",
+                  location: "Maahad Tahfiz Ibnu Dahlan DarSA",
+                  address: "Prima Bukit Beruntung 1, Jalan Anggerik 2g, Bandar Bukit Beruntung, 48300 Rawang",
+                  date: "24 Mei 2026",
+                  day: "Sabtu",
+                  time: "02:00 PM",
+                  mapsQuery: "Maahad+Tahfiz+Ibnu+Dahlan+DarSA+Bukit+Beruntung"
+                },
+                {
+                  title: "Pra-Pelancaran Selangor",
+                  location: "Masjid Al-Falah USJ 9",
+                  address: "Dewan Besar Masjid Al-Falah, 36, Jalan USJ 9/5j, 47620 Subang Jaya",
+                  date: "20 Jun 2026",
+                  day: "Sabtu",
+                  time: "10:30 AM",
+                  mapsQuery: "Masjid+Al-Falah+USJ+9"
+                },
+                {
+                  title: "Pra-Pelancaran Perak",
+                  location: "Pondok Tahfiz DarSA Cawangan Ipoh",
+                  address: "Ipoh, Perak",
+                  date: "25 Jun 2026",
+                  day: "Khamis",
+                  time: "09:00 Malam",
+                  mapsQuery: "Pondok+Tahfiz+DarSA+Ipoh"
+                }
+              ].map((tour, index) => (
+                <RoadTourItem key={index} tour={tour} index={index} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="py-32">
         <div className="max-w-7xl mx-auto px-6">
@@ -1163,6 +1361,41 @@ export default function App() {
         </div>
       </section>
 
+      {/* Ecosystem / Promo Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="glass-card rounded-[48px] overflow-hidden border-gold-400/20 shadow-2xl relative"
+          >
+            <div className="flex flex-col lg:flex-row items-stretch">
+              <div className="lg:w-1/2 p-12 lg:p-20 flex flex-col justify-center">
+                <span className="text-gold-500 uppercase tracking-[0.4em] text-xs font-bold mb-6 block">Kelebihan Eksklusif</span>
+                <h2 className="text-4xl md:text-5xl font-serif mb-8 leading-tight">Nikmati <span className="italic gold-text-gradient">10% Diskaun</span> Seumur Hidup</h2>
+                <p className="text-stone-400 text-lg mb-10 leading-relaxed">
+                  Bukan sekadar santapan rohani, DarSA Istiqomah App turut memberikan manfaat duniawi. Tunjukkan aplikasi anda di mana-mana cawangan DarSA Fried Chicken untuk menikmati potongan harga eksklusif setiap hari.
+                </p>
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-center gap-4 border-l-2 border-gold-500/40 pl-6 py-1">
+                    <span className="font-serif text-xl italic text-stone-300">Lebih Jimat & Lebih Berkat</span>
+                  </div>
+                </div>
+              </div>
+              <div className="lg:w-1/2 relative min-h-[400px]">
+                <img 
+                  src={FriedChickenPromo} 
+                  alt="DarSA Fried Chicken Promo" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent lg:hidden" />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-32 bg-stone-900/20 relative overflow-hidden">
         {/* Aura Blobs */}
@@ -1190,7 +1423,7 @@ export default function App() {
             {[
               { q: "Berapakah harga untuk menyertai DarSA?", a: "Aplikasi DarSA Istiqomah adalah percuma. Tetapi, untuk mendapatkan akses Kuliah, pencapaian, target, Kiblat, Ganjaran Pahala perlu membuat bayaran RM199 (akses seumur hidup)." },
               { q: "Adakah apps ini percuma untuk dimuat turun?", a: "Ya, aplikasi boleh dimuat turun secara percuma. Namun, akses penuh kepada kandungan seperti Ganjaran Pahala, Kuliah dan Kiblat memerlukan langganan." },
-              { q: "Bila saya boleh mula menggunakan apps?", a: "Akses penuh akan dibuka pada pelancaran rasmi pada 16 Mei 2026. Pengguna yang mendaftar awal akan mendapat akses sebaik sahaja sistem diaktifkan." },
+              { q: "Bila saya boleh mula menggunakan apps?", a: "Akses penuh akan dibuka pada pra pelancaran pada 24 Mei 2026. Pengguna yang mendaftar awal akan mendapat akses sebaik sahaja sistem diaktifkan." },
               { q: "Adakah bayaran boleh dibuat secara ansuran?", a: "Ya, kemudahan bayaran 4 kali disediakan untuk pakej Founder. Walau bagaimanapun, bayaran perlu diselesaikan sepenuhnya sebelum pelancaran untuk mengaktifkan akses." },
               { q: "Apa yang saya akan dapat dalam DarSA?", a: "Anda akan mendapat akses kepada tadabur Al-Quran 30 juzuk, kuliah agama, sistem amalan harian, semak pahala bacaan Al Quran serta pelbagai fungsi sokongan seperti waktu solat dan arah kiblat." },
               { q: "Adakah kandungan dalam apps ini sahih?", a: "Semua kandungan dipantau dan dibimbing oleh Tuan Guru Syeikh Muhd Zainul Asri Hj. Mohd Romli bagi memastikan kesahihan dan kefahaman yang tepat." },
@@ -1233,7 +1466,7 @@ export default function App() {
             </div>
             
             <div>
-              <h5 className="font-serif text-xl mb-8 gold-text-gradient font-bold uppercase tracking-widest text-sm">Pautan Pantas</h5>
+              <h5 className="font-serif text-xl mb-8 gold-text-gradient font-bold uppercase tracking-widest">Pautan Pantas</h5>
               <ul className="space-y-4 text-stone-500">
                 {[
                   { name: 'Home', href: '#home' },
@@ -1243,6 +1476,7 @@ export default function App() {
                   { name: 'Iklan Bersama Kami', href: '#iklan' },
                   { name: 'Produk Eksklusif', href: '#produk-eksklusif' },
                   { name: 'Soalan Lazim', href: '#soalan-lazim' },
+                  { name: 'Peluang Kerjaya', href: '#' },
                   { name: 'Privacy Policy', href: 'https://admin.darsaistiqomah.com/privacy-policy', external: true }
                 ].map(l => (
                   <li key={l.name}>
@@ -1260,7 +1494,7 @@ export default function App() {
             </div>
 
             <div className="col-span-1">
-              <h5 className="font-serif text-xl mb-8 gold-text-gradient font-bold uppercase tracking-widest text-sm">Hubungi Kami</h5>
+              <h5 className="font-serif text-xl mb-8 gold-text-gradient font-bold uppercase tracking-widest">Hubungi Kami</h5>
               <ul className="space-y-6 text-stone-400">
                 <li className="flex gap-4 items-start">
                   <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-500"><Phone size={16} /></div>
@@ -1280,7 +1514,14 @@ export default function App() {
                   <div className="p-2 bg-stone-500/10 rounded-lg text-stone-400"><Compass size={16} /></div>
                   <div>
                     <div className="text-[10px] uppercase font-bold tracking-widest text-stone-600 mb-1">Lokasi</div>
-                    <p className="text-sm leading-relaxed">Pondok DarSA, Kampung Baharu Pokok Machang, 06300 Kuala Nerang</p>
+                    <a 
+                      href="https://www.google.com/maps/search/?api=1&query=Pondok+DarSA%2C+Kampung+Baharu+Pokok+Machang%2C+06300+Kuala+Nerang" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-sm leading-relaxed hover:text-gold-400 transition-colors"
+                    >
+                      Pondok DarSA, Kampung Baharu Pokok Machang, 06300 Kuala Nerang
+                    </a>
                   </div>
                 </li>
               </ul>
