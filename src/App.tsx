@@ -116,7 +116,7 @@ const features = [
     icon: <Target className="w-8 h-8 text-gold-400" />
   },
   {
-    title: "Kuliah & Majlis Ilmu",
+    title: "Kuliah Tertutup Khas",
     desc: "Akses eksklusif kuliah Tuan Guru Syeikh Zainul Asri secara berterusan dalam satu platform mudah.",
     icon: <Video className="w-8 h-8 text-gold-400" />
   },
@@ -802,7 +802,7 @@ export default function App() {
               <h2 className="text-4xl md:text-5xl font-serif mb-8 leading-tight">Dibimbing Oleh <span className="italic gold-text-gradient">Tuan Guru</span></h2>
               <div className="space-y-6 text-stone-400 text-lg leading-relaxed mb-10">
                 <p>
-                  Aplikasi DarSA Istiqomah merupakan inisiatif rasmi yang dipimpin dan ditauliahkan oleh <strong>Tuan Guru Syeikh Muhammad Zainul Asri</strong>, Pengasas Pondok DarSA. 
+                  Aplikasi DarSA Istiqomah merupakan inisiatif rasmi yang dipimpin dan ditauliahkan oleh <strong>Tuan Guru Syeikh Muhd Zainul Asri</strong>, Pengasas Pondok DarSA. 
                 </p>
                 <div className="p-8 border-l-2 border-gold-500 bg-white/5 rounded-r-2xl">
                   <p className="italic text-stone-300">"Tujuan utama kami adalah untuk memudahkan ummah beristiqomah dalam amalan harian, di samping mendapat bimbingan ilmu yang bersanad dan sahih."</p>
@@ -1283,7 +1283,7 @@ export default function App() {
                   location: "Restoran DarSA Kota Warisan",
                   address: "Arena Warisan Puteri, 1G Jalan Arena, Kota Warisan, 43900 Sepang",
                   date: "24 Mei 2026",
-                  day: "Sabtu",
+                  day: "Ahad",
                   time: "10:00 AM",
                   mapsQuery: "Restoran+DarSA+Kota+Warisan+Sepang"
                 },
@@ -1292,7 +1292,7 @@ export default function App() {
                   location: "Maahad Tahfiz Ibnu Dahlan DarSA",
                   address: "Prima Bukit Beruntung 1, Jalan Anggerik 2g, Bandar Bukit Beruntung, 48300 Rawang",
                   date: "24 Mei 2026",
-                  day: "Sabtu",
+                  day: "Ahad",
                   time: "02:00 PM",
                   mapsQuery: "Maahad+Tahfiz+Ibnu+Dahlan+DarSA+Bukit+Beruntung"
                 },
