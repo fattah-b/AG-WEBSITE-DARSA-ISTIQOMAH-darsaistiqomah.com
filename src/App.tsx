@@ -553,9 +553,9 @@ export default function App() {
       {/* Navigation */}
       <nav className={`sticky top-0 z-50 transition-all duration-500 ${scrolled ? 'bg-black/40 backdrop-blur-2xl border-b border-white/10 py-3 shadow-2xl' : 'bg-white/5 backdrop-blur-md border-b border-white/5 py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-3">
+          <a href="/" className="flex items-center gap-3">
             <img src={LOGO_URL} alt="DarSA Logo" className="h-10 md:h-12 w-auto" />
-          </div>
+          </a>
           
           <div className="hidden md:flex items-center gap-10">
             {['Home', 'Ciri Utama', 'Aplikasi', 'Harga', 'Iklan'].map((item) => (
