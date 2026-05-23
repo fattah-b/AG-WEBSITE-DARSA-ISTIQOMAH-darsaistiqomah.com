@@ -1380,8 +1380,8 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                name: "Tn Zulkifli Husin",
-                role: "Pengurus KColly",
+                name: "En. Samad",
+                role: "Alor Setar, Kedah",
                 quote: "Sebelum ini susah untuk konsisten membaca Al-Quran. Dengan DarSA, saya ada sistem yang membantu saya istiqomah setiap hari."
               },
               {
