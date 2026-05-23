@@ -904,9 +904,22 @@ export default function App() {
                 <div className="text-xs uppercase bg-gold-400 text-black px-3 py-1 rounded-full font-bold">Terhad</div>
               </div>
               
-              <button className="gold-gradient text-black px-16 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:opacity-90 transition-all shadow-2xl shadow-gold-500/20">
-                Muat Turun
-              </button>
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <a 
+                  href="https://darsaistiqomahapps.orderla.my/founder-elite" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="gold-gradient text-black px-12 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:opacity-90 transition-all shadow-2xl shadow-gold-500/20 text-center inline-block"
+                >
+                  Daftar Sekarang
+                </a>
+                <a 
+                  href="#muat-turun-sekarang" 
+                  className="border border-white/20 hover:border-gold-400/50 text-white hover:text-gold-400 px-12 py-5 rounded-full font-bold uppercase tracking-widest text-sm transition-all text-center inline-block"
+                >
+                  Muat Turun App
+                </a>
+              </div>
             </div>
           </div>
         </div>
