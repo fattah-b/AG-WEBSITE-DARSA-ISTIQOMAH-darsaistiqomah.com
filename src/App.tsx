@@ -1385,13 +1385,13 @@ export default function App() {
                 quote: "Sebelum ini susah untuk konsisten membaca Al-Quran. Dengan DarSA, saya ada sistem yang membantu saya istiqomah setiap hari."
               },
               {
-                name: "Ahmad Yusof 'beymad'",
-                role: "Pendakwah",
+                name: "Ahmad",
+                role: "Gombak, Selangor",
                 quote: "Kuliah dan tadabur dalam apps ini sangat membantu saya memahami agama dengan lebih jelas dan mudah diamalkan."
               },
               {
-                name: "Imam Ismail",
-                role: "Masjid Nur Al-Hidayah",
+                name: "En. Abdullah",
+                role: "Alor Setar, Kedah",
                 quote: "Apa yang paling saya suka adalah peringatan harian. Ia buat saya lebih disiplin dalam ibadah dan menjaga amalan."
               },
             ].map((t, i) => (
