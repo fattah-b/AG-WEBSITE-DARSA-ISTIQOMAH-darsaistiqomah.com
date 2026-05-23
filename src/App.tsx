@@ -117,7 +117,7 @@ const features = [
   },
   {
     title: "Kuliah Tertutup Khas",
-    desc: "Akses eksklusif kuliah Tuan Guru Syeikh Zainul Asri secara berterusan dalam satu platform mudah.",
+    desc: "Akses eksklusif kuliah TUAN GURU SYEIKH MUHD ZAINUL ASRI secara berterusan dalam satu platform mudah.",
     icon: <Video className="w-8 h-8 text-gold-400" />
   },
   {
@@ -154,7 +154,7 @@ const products = [
     name: "40 Wasiat Penghulu Seluruh Umat",
     price: "35",
     img: Kitab1,
-    desc: "📚 Kitab karangan Tuan Guru Syeikh Muhd Zainul Asri.\n✨ Himpunan wasiat berharga untuk panduan hidup ummah."
+    desc: "📚 Kitab karangan TUAN GURU SYEIKH MUHD ZAINUL ASRI.\n✨ Himpunan wasiat berharga untuk panduan hidup ummah."
   }
 ];
 
@@ -542,10 +542,10 @@ export default function App() {
           className="inline-block"
         >
           <span className="text-sm font-bold tracking-widest uppercase inline-block px-4">
-            🔥 Founder Muhibin Terhad 5,000 sahaja – RM199 Lifetime • 📅 Pra pelancaran: 24 Mei 2026 • 📖 Tadabur Al-Quran 30 Juzuk Kini Dibuka • 🌟 Dibimbing Oleh Tuan Guru Syeikh Zainul Asri • 💳 Dapatkan Bamboo NFC DarSA Card Eksklusif • 🛒 Marketplace DarSA: Kitab & Keperluan Ibadah • 
+            🔥 Founder Muhibin Terhad 5,000 sahaja – RM199 Lifetime • 📅 Pra pelancaran: 24 Mei 2026 • 📖 Tadabur Al-Quran 30 Juzuk Kini Dibuka • 🌟 Dibimbing Oleh TUAN GURU SYEIKH MUHD ZAINUL ASRI • 💳 Dapatkan Bamboo NFC DarSA Card Eksklusif • 🛒 Marketplace DarSA: Kitab & Keperluan Ibadah • 
           </span>
           <span className="text-sm font-bold tracking-widest uppercase inline-block px-4">
-            🔥 Founder Muhibin Terhad 5,000 sahaja – RM199 Lifetime • 📅 Pra pelancaran: 24 Mei 2026 • 📖 Tadabur Al-Quran 30 Juzuk Kini Dibuka • 🌟 Dibimbing Oleh Tuan Guru Syeikh Zainul Asri • 💳 Dapatkan Bamboo NFC DarSA Card Eksklusif • 🛒 Marketplace DarSA: Kitab & Keperluan Ibadah • 
+            🔥 Founder Muhibin Terhad 5,000 sahaja – RM199 Lifetime • 📅 Pra pelancaran: 24 Mei 2026 • 📖 Tadabur Al-Quran 30 Juzuk Kini Dibuka • 🌟 Dibimbing Oleh TUAN GURU SYEIKH MUHD ZAINUL ASRI • 💳 Dapatkan Bamboo NFC DarSA Card Eksklusif • 🛒 Marketplace DarSA: Kitab & Keperluan Ibadah • 
           </span>
         </motion.div>
       </div>
@@ -645,7 +645,7 @@ export default function App() {
                 transition={{ delay: 0.4 }}
                 className="text-lg md:text-xl text-stone-400 max-w-2xl mb-12"
               >
-                Platform premium yang membantu umat Islam kekal konsisten dengan Al-Quran, waktu solat, dan bimbingan ilmu dari Tuan Guru Syeikh Zainul Asri.
+                Platform premium yang membantu umat Islam kekal konsisten dengan Al-Quran, waktu solat, dan bimbingan ilmu dari TUAN GURU SYEIKH MUHD ZAINUL ASRI.
               </motion.p>
 
               <motion.div 
@@ -779,7 +779,7 @@ export default function App() {
                   <div className="aspect-4/5 bg-stone-800 overflow-hidden rounded-[48px]">
                     <motion.img 
                       src={SyeikhProfile} 
-                      alt="Tuan Guru Syeikh Zainul Asri"
+                      alt="TUAN GURU SYEIKH MUHD ZAINUL ASRI"
                       className="w-full h-full object-cover"
                       animate={{ scale: [1, 1.1] }}
                       transition={{ 
@@ -802,7 +802,7 @@ export default function App() {
               <h2 className="text-4xl md:text-5xl font-serif mb-8 leading-tight">Dibimbing Oleh <span className="italic gold-text-gradient">Tuan Guru</span></h2>
               <div className="space-y-6 text-stone-400 text-lg leading-relaxed mb-10">
                 <p>
-                  Aplikasi DarSA Istiqomah merupakan inisiatif rasmi yang dipimpin dan ditauliahkan oleh <strong>Tuan Guru Syeikh Muhd Zainul Asri</strong>, Pengasas Pondok DarSA. 
+                  Aplikasi DarSA Istiqomah merupakan inisiatif rasmi yang dipimpin dan ditauliahkan oleh <strong>TUAN GURU SYEIKH MUHD ZAINUL ASRI</strong>, Pengasas Pondok DarSA. 
                 </p>
                 <div className="p-8 border-l-2 border-gold-500 bg-white/5 rounded-r-2xl">
                   <p className="italic text-stone-300">"Tujuan utama kami adalah untuk memudahkan ummah beristiqomah dalam amalan harian, di samping mendapat bimbingan ilmu yang bersanad dan sahih."</p>
@@ -1426,7 +1426,7 @@ export default function App() {
               { q: "Bila saya boleh mula menggunakan apps?", a: "Akses penuh akan dibuka pada pra pelancaran pada 24 Mei 2026. Pengguna yang mendaftar awal akan mendapat akses sebaik sahaja sistem diaktifkan." },
               { q: "Adakah bayaran boleh dibuat secara ansuran?", a: "Ya, kemudahan bayaran 4 kali disediakan untuk pakej Founder. Walau bagaimanapun, bayaran perlu diselesaikan sepenuhnya sebelum pelancaran untuk mengaktifkan akses." },
               { q: "Apa yang saya akan dapat dalam DarSA?", a: "Anda akan mendapat akses kepada tadabur Al-Quran 30 juzuk, kuliah agama, sistem amalan harian, semak pahala bacaan Al Quran serta pelbagai fungsi sokongan seperti waktu solat dan arah kiblat." },
-              { q: "Adakah kandungan dalam apps ini sahih?", a: "Semua kandungan dipantau dan dibimbing oleh Tuan Guru Syeikh Muhd Zainul Asri Hj. Mohd Romli bagi memastikan kesahihan dan kefahaman yang tepat." },
+              { q: "Adakah kandungan dalam apps ini sahih?", a: "Semua kandungan dipantau dan dibimbing oleh TUAN GURU SYEIKH MUHD ZAINUL ASRI Hj. Mohd Romli bagi memastikan kesahihan dan kefahaman yang tepat." },
               { q: "Saya ada soalan berkenaan DarSA Istiqomah App", a: "Anda boleh menghubungi kami melalui WhatsApp atau email yang disediakan di bahagian contact di bawah. Team kami sedia membantu anda sepanjang perjalanan penggunaan aplikasi." },
               { q: "Adakah DarSA Istiqomah App sesuai untuk semua peringkat umur?", a: "Ya, DarSA Istiqomah App direka untuk semua peringkat – sama ada baru bermula or ingin memperkukuhkan istiqomah dalam kehidupan seharian." },
             ].map((faq, i) => (
