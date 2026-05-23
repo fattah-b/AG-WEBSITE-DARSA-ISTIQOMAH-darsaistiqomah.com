@@ -24,7 +24,11 @@ import {
   Globe,
   MapPin,
   Calendar,
-  Navigation
+  Navigation,
+  Award,
+  Star,
+  Baby,
+  Circle
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 
@@ -111,14 +115,29 @@ const features = [
     icon: <BookOpen className="w-8 h-8 text-gold-400" />
   },
   {
+    title: "Misi Khatam Al-Quran",
+    desc: "Tetapkan sasaran khatam peribadi dan jejak kemajuan pembacaan Al-Quran anda hari demi hari secara berstruktur.",
+    icon: <Award className="w-8 h-8 text-gold-400" />
+  },
+  {
     title: "Sistem Istiqomah Rapi",
     desc: "Bukan sekadar belajar, tetapi dibimbing untuk konsisten melalui sistem amalan harian yang membantu anda kekal istiqomah.",
     icon: <Target className="w-8 h-8 text-gold-400" />
   },
   {
+    title: "Program Tasbih Digital",
+    desc: "Kaunter zikir & selawat pintar berserta penyertaan komuniti untuk mencapai sasaran global 1 juta selawat sehari.",
+    icon: <Circle className="w-8 h-8 text-gold-400" />
+  },
+  {
     title: "Kuliah Tertutup Khas",
     desc: "Akses eksklusif kuliah TUAN GURU SYEIKH MUHD ZAINUL ASRI secara berterusan dalam satu platform mudah.",
     icon: <Video className="w-8 h-8 text-gold-400" />
+  },
+  {
+    title: "Ganjaran Pahala",
+    desc: "Jejak dan lihat anggaran ganjaran pahala terkumpul yang dikira secara automatik berdasarkan setiap huruf Al-Quran yang dibaca.",
+    icon: <Star className="w-8 h-8 text-gold-400" />
   },
   {
     title: "Waktu Solat & Peringatan",
@@ -129,6 +148,11 @@ const features = [
     title: "Arah Kiblat Tepat",
     desc: "Panduan arah kiblat yang tepat menggunakan teknologi sensor terkini untuk memudahkan anda di mana sahaja.",
     icon: <Compass className="w-8 h-8 text-gold-400" />
+  },
+  {
+    title: "Khidmat Tahnik",
+    desc: "Tempahan slot sesi tahnik barakah untuk bayi baru lahir, dijalankan mengikut sunnah dan bimbingan asatizah bertauliah.",
+    icon: <Baby className="w-8 h-8 text-gold-400" />
   },
   {
     title: "DarSA Marketplace",
@@ -170,6 +194,8 @@ const FeatureCard = ({ f, i }: { f: any, i: number }) => {
     });
   };
 
+  const isMarketplace = f.title === "DarSA Marketplace";
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -179,9 +205,12 @@ const FeatureCard = ({ f, i }: { f: any, i: number }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative h-full"
+      className="group relative w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] flex-none h-auto flex flex-col"
       style={{ perspective: 1000 }}
     >
+      {isMarketplace && (
+        <div className="absolute -inset-2 bg-linear-to-r from-emerald-500/20 via-gold-500/25 to-emerald-500/20 rounded-[34px] blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-1000 animate-pulse pointer-events-none z-0" />
+      )}
       <motion.div
         animate={{
           rotateX: isHovered ? (mousePos.y - 150) / 15 : 0,
@@ -830,7 +859,7 @@ export default function App() {
             <h3 className="text-4xl md:text-6xl font-serif tracking-tight">Kenapa Pilih <span className="italic">DarSA Istiqomah?</span></h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {features.map((f, i) => (
               <FeatureCard key={i} f={f} i={i} />
             ))}
