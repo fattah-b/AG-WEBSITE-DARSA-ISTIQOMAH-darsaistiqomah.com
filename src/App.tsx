@@ -877,13 +877,18 @@ export default function App() {
               Jadilah sebahagian daripada 5,000 muhibin terawal DarSA Istiqomah. Akses penuh seumur hidup dengan pelbagai fitur premium.
             </p>
             
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 mb-16 text-left">
+             <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 mb-16 text-left">
               {[
                 "Akses Lifetime Sepenuhnya",
                 "Tadabbur Al-Quran AI (30 Juzuk)",
+                "Tonton Kuliah Tertutup oleh TUAN GURU",
+                "Tetapkan Target Khatam Al-Quran",
+                "Lihat Pahala Bacaan Al-Quran",
+                "Semak Jadual Kuliah",
                 "Komuniti Muhibin Elite",
                 "Sistem Amalan Berstruktur",
-                "Arah Kiblat Tepat"
+                "Kiblat & Tasbih Digital",
+                "Akses Tanpa Had & Tanpa Iklan"
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-4 text-stone-300">
                   <CheckCircle2 className="text-emerald-500 w-6 h-6 shrink-0" />
