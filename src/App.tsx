@@ -28,7 +28,9 @@ import {
   Award,
   Star,
   Baby,
-  Circle
+  Circle,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 
@@ -500,11 +502,123 @@ const RoadTourItem = ({ tour, index }: { tour: any, index: number }) => {
   );
 };
 
+const wisdomList = [
+  {
+    category: "Artikel",
+    title: "Kepentingan Membina Jiwa Istiqomah",
+    arabic: "",
+    translation: "Artikel penuh di App DarSA membahaskan bagaimana membina disiplin diri melalui amalan kecil harian yang konsisten.",
+    source: "Rujukan: Artikel Utama Mingguan"
+  },
+  {
+    category: "Video",
+    title: "Tadabur Ayat-Ayat Pilihan Bersama Syeikh",
+    arabic: "",
+    translation: "Tonton rakaman eksklusif kuliah interaktif tadabur Al-Quran di dalam App DarSA secara penuh tanpa gangguan iklan.",
+    source: "Rujukan: Video Siri Kuliah Istiqomah"
+  },
+  {
+    category: "Motivasi",
+    title: "Amalan Yang Istiqomah",
+    arabic: "أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ",
+    translation: "Amalan yang paling dicintai oleh Allah adalah amalan yang berterusan (istiqomah), walaupun ia sedikit.",
+    source: "Hadith Riwayat Al-Bukhari & Muslim"
+  },
+  {
+    category: "Tips Al-Quran",
+    title: "Kelebihan Membaca Al-Quran",
+    arabic: "اقْرَءُوا الْقُرْآنَ فَإِنَّهُ يَأْتِي يَوْمَ الْقِيَامَةِ شَفِيعًا لِأَصْحَابِهِ",
+    translation: "Bacalah Al-Quran, kerana sesungguhnya ia akan datang pada hari kiamat sebagai syafaat kepada pembacanya.",
+    source: "Hadith Riwayat Muslim"
+  },
+  {
+    category: "Tazkirah",
+    title: "Keberkatan Memulakan Hari",
+    arabic: "اللَّهُمَّ بَارِكْ لِأُمَّتِي فِي بُكُورِهَا",
+    translation: "Ya Allah, berkatilah umatku pada waktu pagi mereka. Mulakan hari anda dengan zikir dan Al-Quran untuk menjemput keberkatan sepanjang hari.",
+    source: "Hadith Riwayat Abu Dawud"
+  },
+  {
+    category: "Inspirasi Muhibbin",
+    title: "Kisah Hijrah & Kekuatan Ukhuwah",
+    arabic: "",
+    translation: "Perkongsian kisah-kisah inspirasi dari komuniti Muhibbin DarSA dalam mencari kemanisan iman dan memulakan hijrah diri.",
+    source: "Kisah Benar Komuniti DarSA"
+  }
+];
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const IDLE_TIMEOUT = 3000;
+
+  const [selectedCategory, setSelectedCategory] = useState('Semua');
+  const [activeWisdomIndex, setActiveWisdomIndex] = useState(0);
+  const [wisdomDirection, setWisdomDirection] = useState(0);
+
+  const filteredWisdom = wisdomList.filter(item => 
+    selectedCategory === 'Semua' ? true : item.category === selectedCategory
+  );
+
+  const wisdomCategories = ['Artikel', 'Video', 'Motivasi', 'Tips Al-Quran', 'Tazkirah', 'Inspirasi Muhibbin'];
+
+  // Auto-rotate effect
+  useEffect(() => {
+    if (wisdomList.length <= 1) return;
+    const interval = setInterval(() => {
+      setWisdomDirection(1);
+      if (selectedCategory === 'Semua') {
+        setActiveWisdomIndex((prev) => (prev + 1) % filteredWisdom.length);
+      } else {
+        if (activeWisdomIndex < filteredWisdom.length - 1) {
+          setActiveWisdomIndex((prev) => prev + 1);
+        } else {
+          const currentCatIdx = wisdomCategories.indexOf(selectedCategory);
+          const nextCat = wisdomCategories[(currentCatIdx + 1) % wisdomCategories.length];
+          setSelectedCategory(nextCat);
+          setActiveWisdomIndex(0);
+        }
+      }
+    }, 5000); // Auto-rotates every 5 seconds
+    return () => clearInterval(interval);
+  }, [selectedCategory, activeWisdomIndex, filteredWisdom.length]);
+
+  const handleWisdomNext = () => {
+    setWisdomDirection(1);
+    if (selectedCategory === 'Semua') {
+      setActiveWisdomIndex((prev) => (prev + 1) % filteredWisdom.length);
+    } else {
+      if (activeWisdomIndex < filteredWisdom.length - 1) {
+        setActiveWisdomIndex((prev) => prev + 1);
+      } else {
+        const currentCatIdx = wisdomCategories.indexOf(selectedCategory);
+        const nextCat = wisdomCategories[(currentCatIdx + 1) % wisdomCategories.length];
+        setSelectedCategory(nextCat);
+        setActiveWisdomIndex(0);
+      }
+    }
+  };
+
+  const handleWisdomPrev = () => {
+    setWisdomDirection(-1);
+    if (selectedCategory === 'Semua') {
+      setActiveWisdomIndex((prev) => (prev - 1 + filteredWisdom.length) % filteredWisdom.length);
+    } else {
+      if (activeWisdomIndex > 0) {
+        setActiveWisdomIndex((prev) => prev - 1);
+      } else {
+        const currentCatIdx = wisdomCategories.indexOf(selectedCategory);
+        const prevCat = wisdomCategories[(currentCatIdx - 1 + wisdomCategories.length) % wisdomCategories.length];
+        const prevCatFiltered = wisdomList.filter(item => item.category === prevCat);
+        setSelectedCategory(prevCat);
+        setActiveWisdomIndex(prevCatFiltered.length - 1);
+      }
+    }
+  };
+
+  const safeWisdomIndex = activeWisdomIndex < filteredWisdom.length ? activeWisdomIndex : 0;
+  const currentWisdom = filteredWisdom[safeWisdomIndex];
 
   useEffect(() => {
     let idleTimer: NodeJS.Timeout;
@@ -1404,6 +1518,176 @@ export default function App() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Ilmu & Istiqomah Section */}
+      <section id="ilmu-istiqomah" className="py-16 relative overflow-hidden bg-stone-900/10">
+        {/* Glowing Background Auras */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-500/5 blur-[150px] rounded-full z-0 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/5 blur-[120px] rounded-full z-0 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-8">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-sm uppercase tracking-[0.4em] text-gold-500 font-bold mb-4"
+            >
+              Bimbingan Harian & Santapan Rohani
+            </motion.h2>
+            <motion.h3 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-serif tracking-tight"
+            >
+              Ilmu & <span className="italic">Istiqomah</span>
+            </motion.h3>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-stone-400 text-lg max-w-2xl mx-auto mt-4"
+            >
+              Dalami ilmu yang sahih dan suburkan amalan harian dengan kutipan hadith, dalil, serta tazkirah terpilih.
+            </motion.p>
+          </div>
+
+          {/* Categories Tab Selector */}
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+             {['Semua', 'Artikel', 'Video', 'Motivasi', 'Tips Al-Quran', 'Tazkirah', 'Inspirasi Muhibbin'].map((cat) => (
+              <button
+                key={cat}
+                onClick={() => { setSelectedCategory(cat); setActiveWisdomIndex(0); }}
+                className={`px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all cursor-pointer ${
+                  selectedCategory === cat || (selectedCategory === 'Semua' && currentWisdom && currentWisdom.category === cat)
+                    ? 'bg-gold-500 text-black shadow-lg shadow-gold-500/20'
+                    : 'bg-white/5 hover:bg-white/10 text-stone-400 hover:text-white border border-white/5'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Interactive Infinite Halo Carousel */}
+          <div className="relative w-full max-w-4xl mx-auto flex items-center justify-between min-h-[480px]">
+            {/* Spinning Halo Background */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] md:w-[600px] md:h-[600px] pointer-events-none z-0">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                className="w-full h-full rounded-full border-2 border-dashed border-gold-500/10"
+              />
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-8 rounded-full border border-emerald-500/5"
+              />
+            </div>
+
+            {/* Left Nav Button */}
+            <button
+              onClick={handleWisdomPrev}
+              disabled={wisdomList.length <= 1}
+              className="absolute left-2 md:-left-16 z-20 bg-black/60 hover:bg-gold-500 hover:text-black text-gold-400 border border-white/10 p-4 rounded-full transition-all disabled:opacity-30 disabled:pointer-events-none backdrop-blur-md cursor-pointer"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            {/* Card Window / Slot */}
+            <div className="w-full flex justify-center overflow-hidden py-10 relative z-10">
+              <AnimatePresence mode="wait" custom={wisdomDirection}>
+                {filteredWisdom.length > 0 ? (
+                  <motion.div
+                    key={`${selectedCategory}-${safeWisdomIndex}`}
+                    custom={wisdomDirection}
+                    variants={{
+                      enter: (dir: number) => ({
+                        x: dir > 0 ? 100 : -100,
+                        opacity: 0,
+                        scale: 0.95,
+                        rotateY: dir > 0 ? 15 : -15,
+                      }),
+                      center: {
+                        x: 0,
+                        opacity: 1,
+                        scale: 1,
+                        rotateY: 0,
+                        transition: {
+                          duration: 0.4,
+                          ease: "easeOut"
+                        }
+                      },
+                      exit: (dir: number) => ({
+                        x: dir < 0 ? 100 : -100,
+                        opacity: 0,
+                        scale: 0.95,
+                        rotateY: dir < 0 ? 15 : -15,
+                        transition: {
+                          duration: 0.3
+                        }
+                      })
+                    }}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    className="w-full max-w-2xl glass-card p-8 md:p-14 rounded-[36px] border-white/5 relative overflow-hidden flex flex-col items-center text-center shadow-2xl backdrop-blur-xl"
+                  >
+                    {/* Glowing highlight aura inside card */}
+                    <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-gold-500/10 blur-[60px] rounded-full pointer-events-none" />
+                    
+                    {/* Category tag */}
+                    <span className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 ${
+                      currentWisdom.category === 'Artikel' || currentWisdom.category === 'Video' || currentWisdom.category === 'Motivasi'
+                        ? 'bg-gold-500/10 text-gold-400 border border-gold-500/20'
+                        : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                    }`}>
+                      {currentWisdom.category}
+                    </span>
+
+                    {/* Title */}
+                    <h4 className="text-xl md:text-2xl font-serif text-white mb-8">{currentWisdom.title}</h4>
+
+                    {/* Arabic Scripture if exists */}
+                    {currentWisdom.arabic && (
+                      <p className="text-2xl md:text-3xl text-gold-300/90 leading-loose mb-8 tracking-wide font-normal max-w-lg leading-relaxed antialiased">
+                        {currentWisdom.arabic}
+                      </p>
+                    )}
+
+                    {/* Translation */}
+                    <p className="text-stone-300 text-base md:text-lg leading-relaxed mb-10 italic max-w-xl">
+                      "{currentWisdom.translation}"
+                    </p>
+
+                    {/* Divider */}
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gold-500/30 to-transparent mb-6" />
+
+                    {/* Source */}
+                    <span className="text-stone-500 text-[10px] font-bold uppercase tracking-[0.2em]">
+                      {currentWisdom.source}
+                    </span>
+                  </motion.div>
+                ) : (
+                  <div className="text-stone-500 text-center py-20">Tiada kandungan tersedia.</div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Right Nav Button */}
+            <button
+              onClick={handleWisdomNext}
+              disabled={wisdomList.length <= 1}
+              className="absolute right-2 md:-right-16 z-20 bg-black/60 hover:bg-gold-500 hover:text-black text-gold-400 border border-white/10 p-4 rounded-full transition-all disabled:opacity-30 disabled:pointer-events-none backdrop-blur-md cursor-pointer"
+            >
+              <ChevronRight size={24} />
+            </button>
           </div>
         </div>
       </section>
